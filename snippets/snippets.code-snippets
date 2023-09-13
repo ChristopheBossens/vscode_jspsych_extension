@@ -1,0 +1,28 @@
+{
+    "jsPsychHtmlButtonResponse" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychHtmlButtonResponse"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychHtmlButtonResponse," , 
+            "\tstimulus : '${2:stimulus}',", 
+            "\tchoices : [${3}]", 
+            "}\n;"
+        ],
+		"description" : "Display an HTML-formatted stimulus and allow the participant to respond by choosing a button to click. The button can be customized extensively, e.g., using images in place of standard buttons."
+	},
+    "jsPsychAnimation" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychAnimation"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychAnimation,",
+            "\tstimuli: [${2}],",
+            "\tsequence_reps : ${3:3},",
+            "\tframe_time : ${4:300},",
+            "\tprompt : '${5}'",
+            "};\n"
+        ],
+        "description" : "Shows a sequence of images at a specified frame rate. Records key presses (including timing information) made by the participant while they are viewing the animation."
+    }
+}

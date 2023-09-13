@@ -9,13 +9,15 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
+    "snippets": [
       {
-        "command": "jspsych-code-completion.helloWorld",
-        "title": "Hello World"
+        "language": "javascript",
+        "path": "./snippets/snippets.code-snippets"
       }
     ]
   },
