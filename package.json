@@ -19,7 +19,10 @@
         "language": "javascript",
         "path": "./snippets/snippets.code-snippets"
       }
-    ]
+    ],
+    "capabilities":{
+      "hoverProvider": "true"
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

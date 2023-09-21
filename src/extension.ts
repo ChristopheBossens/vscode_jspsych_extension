@@ -10,37 +10,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "jspsych-code-completion" is now active!');
 
-	const provider1 = vscode.languages.registerCompletionItemProvider('html', {
-		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
-			const simpleCompletion = new vscode.CompletionItem('Hello Worldest!');
 
-			const snippetCompletion = new vscode.CompletionItem('Good part of the day');
-			snippetCompletion.insertText = new vscode.SnippetString('Good ${1|morning, afternoon, evening|}. It is ${1}, right?');
-
-			const docs: any = new vscode.MarkdownString("Inserts a snippet that lets you select [link](.ts).");
-			snippetCompletion.documentation = docs;
-
-			docs.baseUri = vscode.Uri.parse('http://example.com/a/b/c');
-
-			const commitCharacerCompletion = new vscode.CompletionItem('jsPsych');
-			commitCharacerCompletion.commitCharacters = ['.'];
-			commitCharacerCompletion.documentation = new vscode.MarkdownString('Press `.` to get `console.`');
-
-			const commandCompletion = new vscode.CompletionItem('new');
-			commandCompletion.kind = vscode.CompletionItemKind.Keyword;
-			commandCompletion.insertText = 'new';
-			commandCompletion.command = { command : 'editor.action.triggerSuggest', title : 'Re-trigger completions ...'};
-
-			return [
-				simpleCompletion,
-				snippetCompletion,
-				commitCharacerCompletion,
-				commandCompletion
-			];
-		},		
-	});
-
-	context.subscriptions.push(provider1);
 
 	const provider2 = vscode.languages.registerCompletionItemProvider(
 		'html',
@@ -54,9 +24,13 @@ export function activate(context: vscode.ExtensionContext) {
 				const addNodeToEndOfTimeline = new vscode.CompletionItem('addNodeToEndOfTimeline()', vscode.CompletionItemKind.Method);
 				addNodeToEndOfTimeline.detail = "jsPsych.addNodeToEndOfTimeline(node_parameters)";
 
+				const endCurrentTimeline = new vscode.CompletionItem('endCurrentTimeline()', vscode.CompletionItemKind.Method);
+				endCurrentTimeline.detail = "jspsych.endCurrentTimeline(node)";
+				endCurrentTimeline.documentation = new vscode.MarkdownString('<table><th><td>Header 1</td><td>Header 2</td></th></table>');
+				endCurrentTimeline.documentation.supportHtml = true;
 				return [
 					addNodeToEndOfTimeline,
-					new vscode.CompletionItem('endCurrentTimeline', vscode.CompletionItemKind.Method),
+					endCurrentTimeline,
 					new vscode.CompletionItem('endExperiment', vscode.CompletionItemKind.Method),
 					new vscode.CompletionItem('finishTrial', vscode.CompletionItemKind.Method),
 					new vscode.CompletionItem('getAllTimelineVariables', vscode.CompletionItemKind.Method),
@@ -128,6 +102,80 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 	
 	context.subscriptions.push(randomizationModuleProvider);
+
+	// Hover information
+	const pluginsHoverInformation = vscode.languages.registerHoverProvider(
+		'html',
+		{
+			provideHover(document, position, token) {
+				const range = document.getWordRangeAtPosition(position);
+				const word = document.getText(range);
+
+				if (word === 'jsPsychAnimation'){
+					//const markdown = new vscode.MarkdownString("This **plugin** displays a sequence of images at a fixed frame rate. The sequence can be looped a specified number of times. The participant is free to respond at any point during the animation, and the time of the response is recorded.\n\n| Parameter | Type | Default value | Description |\n\n| --- | --- | --- | --- |\n\n| stimuli | array | undefined | Each element of the array is a path to an image file. |");
+					const markdown = new vscode.MarkdownString(`<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stimuli</td>
+<td>array</td>
+<td><em>undefined</em></td>
+<td>Each element of the array is a path to an image file.</td>
+</tr>
+<tr>
+<td>frame_time</td>
+<td>numeric</td>
+<td>250</td>
+<td>How long to display each image in milliseconds.</td>
+</tr>
+<tr>
+<td>frame_isi</td>
+<td>numeric</td>
+<td>0</td>
+<td>If greater than 0, then a gap will be shown between each image in the sequence. This parameter specifies the length of the gap in milliseconds.</td>
+</tr>
+<tr>
+<td>sequence_reps</td>
+<td>numeric</td>
+<td>1</td>
+<td>How many times to show the entire sequence. There will be no gap (other than the gap specified by <code>frame_isi</code>) between repetitions.</td>
+</tr>
+<tr>
+<td>choices</td>
+<td>array of strings</td>
+<td><code>"ALL_KEYS"</code></td>
+<td>This array contains the key(s) that the participant is allowed to press in order to respond to the stimulus. Keys should be specified as characters (e.g., <code>'a'</code>, <code>'q'</code>, <code>' '</code>, <code>'Enter'</code>, <code>'ArrowDown'</code>) - see <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values">this page</a> and <a href="https://www.freecodecamp.org/news/javascript-keycode-list-keypress-event-key-codes/">this page (event.key column)</a> for more examples. Any key presses that are not listed in the array will be ignored. The default value of <code>"ALL_KEYS"</code> means that all keys will be accepted as valid responses. Specifying <code>"NO_KEYS"</code> will mean that no responses are allowed.</td>
+</tr>
+<tr>
+<td>prompt</td>
+<td>string</td>
+<td>null</td>
+<td>This string can contain HTML markup. Any content here will be displayed below the stimulus. The intention is that it can be used to provide a reminder about the action the participant is supposed to take (e.g., which key(s) to press).</td>
+</tr>
+<tr>
+<td>render_on_canvas</td>
+<td>boolean</td>
+<td>true</td>
+<td>If true, the images will be drawn onto a canvas element. This prevents a blank screen (white flash) between consecutive images in some browsers, like Firefox and Edge. If false, the image will be shown via an img element, as in previous versions of jsPsych.</td>
+</tr>
+</tbody>
+</table>`);
+					markdown.supportHtml = true;
+					markdown.isTrusted = true;
+					return new vscode.Hover(markdown, new vscode.Range(position, position));
+				}
+			},
+		}
+	);
+
+	context.subscriptions.push(pluginsHoverInformation);
 }
 
 // This method is called when your extension is deactivated
