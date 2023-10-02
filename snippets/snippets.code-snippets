@@ -1,16 +1,5 @@
+
 {
-    "jsPsychHtmlButtonResponse" : {
-		"scope" : "javascript, html",
-		"prefix" : ["jsPsychHtmlButtonResponse"],
-		"body" : [
-            "let ${1:trial} = {", 
-            "\ttype : jsPsychHtmlButtonResponse," , 
-            "\tstimulus : '${2:stimulus}',", 
-            "\tchoices : [${3}]", 
-            "}\n;"
-        ],
-		"description" : "Display an HTML-formatted stimulus and allow the participant to respond by choosing a button to click. The button can be customized extensively, e.g., using images in place of standard buttons."
-	},
     "jsPsychAnimation" : {
         "scope" : "javascript, html",
         "prefix" : ["jsPsychAnimation"],
@@ -24,5 +13,227 @@
             "};\n"
         ],
         "description" : "Shows a sequence of images at a specified frame rate. Records key presses (including timing information) made by the participant while they are viewing the animation."
-    }
+    },
+    "jsPsychAudioButtonResponse" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychAudioButtonResponse"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychAudioButtonResponse,",
+            "\tstimulus: '${2}',",
+            "\tchoices : [${3}],",
+            "\tprompt : '${5}'",
+            "};\n"
+        ],
+        "description" : "This plugin plays audio files and records responses generated with a button click."
+    },
+    "jsPsychAudioKeyboardResponse" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychAudioKeyboardResponse"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychAudioKeyboardResponse,",
+            "\tstimulus: '${2}',",
+            "\tchoices : [${3}],",
+            "\tprompt : '${4}',",
+            "\tresponse_ends_trial: true",
+            "};\n"
+        ],
+        "description" : "This plugin plays audio files and records responses generated with the keyboard."
+    },
+    "jsPsychAudioSliderResponse" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychAudioSliderResponse"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychAudioSliderResponse,",
+            "\tstimulus: '${2}',",
+            "\tlabels : [${3}],",
+            "\tprompt : '${4}',",
+            "};\n"
+        ],
+        "description" : "This plugin plays an audio file and allows the participant to respond by dragging a slider."
+    },
+    "jsPsychBrowserCheck" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychBrowserCheck"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychBrowserCheck,",
+        ],
+        "description" : "This plugin measures and records various features of the participant's browser and can end the experiment if defined inclusion criteria are not met."
+    },
+    "jsPsychCallFunction" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychCallFunction"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychCallFunction,",
+            "\tfunc: ${2},",
+            "};\n"
+        ],
+        "description" : "This plugin executes a specified function. This allows the experimenter to run arbitrary code at any point during the experiment."
+    },
+    "jsPsychCanvasButtonResponse" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychCanvasButtonResponse"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychCanvasButtonResponse,",
+            "\tstimulus: function(c){\n\t\t${2}},",
+            "\tchoices: [${3}],",
+            "\tprompt : '${4}',",
+            "};\n"
+        ],
+        "description" : "This plugin can be used to draw a stimulus on a HTML canvas element, and record a button click response and response time."
+    },
+    "jsPsychCanvasKeyboardResponse" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychCanvasKeyboardResponse"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychCanvasButtonResponse,",
+            "\tstimulus: function(c){\n\t\t${2}},",
+            "\tchoices: [${3}],",
+            "\tprompt : '${4}',",
+            "};\n"
+        ],
+        "description" : "This plugin can be used to draw a stimulus on a HTML canvas element and record a keyboard response."
+    },
+    "jsPsychCanvasSliderResponse" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychCanvasSliderResponse"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychCanvasSliderResponse,",
+            "\tstimulus: function(c){\n\t\t${2}},",
+            "\tprompt : '${3}',",
+            "};\n"
+        ],
+        "description" : "This plugin can be used to draw a stimulus on a HTML canvas element and collect a response within a range of values, which is made by dragging a slider."
+    },
+    "jsPsychCategorizeAnimation" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychCategorizeAnimation"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype : jsPsychCategorizeAnimation,",
+            "\tstimuli: [${2}],",
+            "\tchoices : [${3}],",
+            "\tprompt : '${4}',",
+            "};\n"
+        ],
+        "description" : "The categorize animation plugin shows a sequence of images at a specified frame rate."
+    },
+    "jsPsychCategorizeHtml" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychCategorizeHtml"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype           : jsPsychCategorizeHtml,",
+            "\tstimulus       : '${2}',",
+            "\tkey_answer     : '${3}',",
+            "\ttext_answer    : '${4}',",
+            "\tchoices        : [${5}]',",
+            "\tcorrect_text   : '${6}',",
+            "\tincorrect_text : '${7}',",
+            "\tprompt         : '${8}',",
+            "};\n"
+        ],
+        "description" : "The categorize html plugin shows an HTML object on the screen."
+    },
+    "jsPsychCategorizeImage" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychCategorizeImage"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype           : jsPsychCategorizeImage,",
+            "\tstimulus       : '${2}',",
+            "\tkey_answer     : '${3}',",
+            "\ttext_answer    : '${4}',",
+            "\tchoices        : [${5}]',",
+            "\tcorrect_text   : '${6}',",
+            "\tincorrect_text : '${7}',",
+            "\tprompt         : '${8}',",
+            "};\n"
+        ],
+        "description" : "The categorize image plugin shows an image object on the screen. The participant responds by pressing a key."
+    },
+    "jsPsychCloze" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychCloze"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype         : jsPsychCloze,",
+            "\ttext         : '${2}',",
+            "\tallow_blanks : '${3}',",
+            "\tmistake_fn   : function() {\n\t\t${4}},",
+            "};\n"
+        ],
+        "description" : "This plugin displays a text with certain words omitted. Participants are asked to replace the missing items."
+    },
+    "jsPsychExternalHtml" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychExternalHtml"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype     : jsPsychExternalHtml,",
+            "\turl      : '${2}',",
+            "\tcont_btn : '${3}',",
+            "\tcheck_fn : ${4},",
+            "};\n"
+        ],
+        "description" : "The HTML plugin displays an external HTML document (often a consent form). Either a keyboard response or a button press can be used to continue to the nex"
+    },
+    "jsPsychFreeSort" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychFreeSort"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype             : jsPsychFreeSort,",
+            "\tstimuli          : '${2}',",
+            "\tstim_width       : ${3},",
+            "\tstim_height      : ${4},",
+            "\tsort_area_width  : ${5},",
+            "\tsort_area_height : ${6},",
+            "\tprompt           : '${7}',",
+            "};\n"
+        ],
+        "description" : "The free-sort plugin displays one or more images on the screen that the participant can interact with by clicking and dragging with a mouse, or touching and dragging with a touchscreen device."
+    },
+    "jsPsychFullscreen" : {
+        "scope" : "javascript, html",
+        "prefix" : ["jsPsychFullscreen"],
+        "body" : [
+            "let ${1:trial} = {",
+            "\ttype             : jsPsychFullscreen,",
+            "\tfullscreen_mode  : ${2:true},",
+            "};\n"
+        ],
+        "description" : "The fullscreen plugin allows the experiment to enter or exit fullscreen mode."
+    },
+    "jsPsychHtmlAudioResponse" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychHtmlAudioResponse"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychHtmlAudioResponse," , 
+            "\tstimulus : '${2:stimulus}',", 
+            "\trecording_duration : ${3}", 
+            "}\n;"
+        ],
+		"description" : "This plugin displays HTML content and records audio from the participant via a microphone."
+	},
+    "jsPsychHtmlButtonResponse" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychHtmlButtonResponse"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychHtmlButtonResponse," , 
+            "\tstimulus : '${2:stimulus}',", 
+            "\tchoices : [${3}]", 
+            "}\n;"
+        ],
+		"description" : "Display an HTML-formatted stimulus and allow the participant to respond by choosing a button to click. The button can be customized extensively, e.g., using images in place of standard buttons."
+	},
 }
