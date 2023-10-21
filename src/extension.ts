@@ -21,34 +21,109 @@ export function activate(context: vscode.ExtensionContext) {
 					return undefined;
 				}
 
+				// Create completion items
 				const addNodeToEndOfTimeline = new vscode.CompletionItem('addNodeToEndOfTimeline()', vscode.CompletionItemKind.Method);
 				addNodeToEndOfTimeline.detail = "jsPsych.addNodeToEndOfTimeline(node_parameters)";
+				addNodeToEndOfTimeline.sortText = '1';
 
 				const endCurrentTimeline = new vscode.CompletionItem('endCurrentTimeline()', vscode.CompletionItemKind.Method);
 				endCurrentTimeline.detail = "jspsych.endCurrentTimeline(node)";
-				endCurrentTimeline.documentation = new vscode.MarkdownString('<table><th><td>Header 1</td><td>Header 2</td></th></table>');
-				endCurrentTimeline.documentation.supportHtml = true;
+				endCurrentTimeline.sortText = '1';
+				
+				const endExperiment = new vscode.CompletionItem('endExperiment()', vscode.CompletionItemKind.Method);
+				endExperiment.detail = "jsPsych.endExperiment(end_message, data)";
+				endExperiment.sortText = '1';
+
+				const finishTrial = new vscode.CompletionItem('finishTrial()', vscode.CompletionItemKind.Method);
+				finishTrial.detail = "jsPsych.finishTrial(data)";
+				finishTrial.sortText = '&';
+
+				const getAllTimelineVariables = new vscode.CompletionItem('getAllTimelineVariables()', vscode.CompletionItemKind.Method);
+				getAllTimelineVariables.detail = "jsPsych.getAllTimelineVariables()";
+				getAllTimelineVariables.sortText = '1';
+
+				const getCurrentTimelineNodeID = new vscode.CompletionItem('getCurrentTimelineNodeID()', vscode.CompletionItemKind.Method);
+				getCurrentTimelineNodeID.detail = "jsPsych.getCurrentTimelineNodeID()";
+				getCurrentTimelineNodeID.sortText = '1';
+
+				const getCurrentTrial = new vscode.CompletionItem('getCurrentTrial()', vscode.CompletionItemKind.Method);
+				getCurrentTrial.detail = "jsPsych.getCurrentTrial()";
+				getCurrentTrial.sortText = '1';
+
+				const getDisplayElement = new vscode.CompletionItem('getDisplayElement()', vscode.CompletionItemKind.Method);
+				getDisplayElement.detail = "jsPsych.getDisplayElement()";
+				getDisplayElement.sortText = '1';
+
+				const getInitSettings = new vscode.CompletionItem('getInitSettings()', vscode.CompletionItemKind.Method);
+				getInitSettings.detail = "jsPsych.getInitSettings()";
+				getInitSettings.sortText = '1';
+
+				const getProgress = new vscode.CompletionItem('getProgress()', vscode.CompletionItemKind.Method);
+				getProgress.detail = "jsPsych.getProgress()";
+				getProgress.sortText = '1';
+
+				const getProgressBarCompleted = new vscode.CompletionItem('getProgressBarCompleted()', vscode.CompletionItemKind.Method);
+				getProgressBarCompleted.detail = "jsPsych.getProgressBarCompleted()";
+				getProgressBarCompleted.sortText = '1';
+
+				const getStartTime = new vscode.CompletionItem('getStartTime()', vscode.CompletionItemKind.Method);
+				getStartTime.detail = "jsPsych.getStartTime()";
+				getStartTime.sortText = '1';
+
+				const getTotalTime = new vscode.CompletionItem('getTotalTime()', vscode.CompletionItemKind.Method);
+				getTotalTime.detail = "jsPsych.getTotalTime()";
+				getTotalTime.sortText = '1';
+
+				const pauseExperiment = new vscode.CompletionItem('pauseExperiment()', vscode.CompletionItemKind.Method);
+				pauseExperiment.detail = "jsPsych.pauseExperiment()";
+				pauseExperiment.sortText = '1';
+
+				const resumeExperiment = new vscode.CompletionItem('resumeExperiment()', vscode.CompletionItemKind.Method);
+				resumeExperiment.detail = "jsPsych.resumeExperiment()";
+				resumeExperiment.sortText = '1';
+
+				const run = new vscode.CompletionItem('run()', vscode.CompletionItemKind.Method);
+				run.detail = "jsPsych.run(timeline)";
+				run.sortText = '1';
+
+				const setProgressBar = new vscode.CompletionItem('setProgressBar()', vscode.CompletionItemKind.Method);
+				setProgressBar.detail = "jsPsych.setProgressBar(value)";
+				setProgressBar.sortText = '1';
+
+				const timelineVariable = new vscode.CompletionItem('timelineVariable()', vscode.CompletionItemKind.Method);
+				timelineVariable.detail = "jsPsych.timelineVariable(variable, call_immediate)";
+				timelineVariable.sortText = '1';
+
+				const version = new vscode.CompletionItem('version()', vscode.CompletionItemKind.Method);
+				version.detail = "jsPsych.version()";
+				version.sortText = '1';
+
+				// Register modules
+				const randomization = new vscode.CompletionItem('randomization', vscode.CompletionItemKind.Module);
+				randomization.sortText = '0';
+				randomization.documentation = 'The jsPsych.randomization module contains methods that are useful for generating random lists of trial variables.';
+
 				return [
 					addNodeToEndOfTimeline,
 					endCurrentTimeline,
-					new vscode.CompletionItem('endExperiment', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('finishTrial', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('getAllTimelineVariables', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('getCurrentTimelineNodeID', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('getCurrentTrial', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('getDisplayElement', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('getInitSettings', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('getProgress', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('getProgressBarCompleted', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('getStartTime', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('getTotalTime', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('pauseExperiment', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('resumeExperiment', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('run', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('setProgressBar', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('timelineVariable', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('version', vscode.CompletionItemKind.Method),
-					new vscode.CompletionItem('randomization', vscode.CompletionItemKind.Module)
+					endExperiment,
+					finishTrial,
+					getAllTimelineVariables,
+					getCurrentTimelineNodeID,
+					getCurrentTrial,
+					getDisplayElement,
+					getInitSettings,
+					getProgress,
+					getProgressBarCompleted,
+					getStartTime,
+					getTotalTime,
+					pauseExperiment,
+					resumeExperiment,
+					run,
+					setProgressBar,
+					timelineVariable,
+					version,
+					randomization
 				];
 			}
 		},
@@ -69,23 +144,27 @@ export function activate(context: vscode.ExtensionContext) {
 				// setSeed
 				const setSeed = new vscode.CompletionItem('setSeed', vscode.CompletionItemKind.Method);
 				setSeed.detail = "jsPsych.randomization.setSeed(seed)";
+				setSeed.sortText = '1';
 				setSeed.insertText = new vscode.SnippetString('setSeed()');
 				setSeed.documentation = new vscode.MarkdownString('This function will override the behavior of Math.random() to produce a seedable pseudo random number generator. It uses the seedrandom package. Note that calling setSeed() will change how Math.random() behaves for the entire document. If you have non-jsPsych components on the page that use Math.random() they will be affected. \n\nUsing setSeed() without passing in a seed will generate a random 32-bit seed. The seed value will be returned from the function call, allowing you to save it in the data for the experiment if needed.\n\n[Dcoumentation](https://www.jspsych.org/7.3/reference/jspsych-randomization/#jspsychrandomizationsetseed)');
 								
 				// repeat
 				const repeat = new vscode.CompletionItem('repeat', vscode.CompletionItemKind.Method);
 				repeat.detail = "jsPsych.randomization.repeat(array, repetitions, unpack)";
+				repeat.sortText = '1';
 				repeat.insertText = new vscode.SnippetString('repeat(${1|array|}, {$2|repetitions|})');
 				repeat.documentation = new vscode.MarkdownString('This method takes an array of values and generates a new random order of the array, with the option of repeating each element of the array a specified number of times.\n\n[Documentation](https://www.jspsych.org/7.3/reference/jspsych-randomization/#jspsychrandomizationrepeat)');
 				
 				// shuffle
 				const shuffle = new vscode.CompletionItem('shuffle', vscode.CompletionItemKind.Method);
 				shuffle.detail = "jsPsych.randomization.shuffle(array)";
+				shuffle.sortText = '1';
 				shuffle.insertText = new vscode.SnippetString('shuffle(${1|array|})');
 				shuffle.documentation = new vscode.MarkdownString('Returns an array with the same elements as the input array in a random order.\n\n[Documentation](https://www.jspsych.org/7.3/reference/jspsych-randomization/#jspsychrandomizationshuffle)');
 
 				// factorial
 				const factorial = new vscode.CompletionItem('factorial', vscode.CompletionItemKind.Method);
+				factorial.sortText = '1';
 				factorial.insertText = new vscode.SnippetString('factorial(${1|factors|}, ${2|repetitions|}, ${3|unpack|})');
 				factorial.detail = "jsPsych.randomization.factorial(factors, repetitions, unpack)";
 				factorial.documentation = new vscode.MarkdownString('This method takes a list of factors and their levels, and creates a full factorial design by creating each unique combination of the factors. The returned set of combinations is in a random order.');
