@@ -255,6 +255,60 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(pluginsHoverInformation);
+
+	/*
+		Signature helper providers 
+	*/
+	const signatureHelpProvider = vscode.languages.registerSignatureHelpProvider(
+		{ scheme: 'file', language: 'html' }, // Replace 'yourLanguage' with the language you're targeting
+		{
+			provideSignatureHelp(document, position, token, context) {
+				// Get the current line and the current word at the cursor position
+				const line = document.lineAt(position.line).text;
+				const currentWord = document.getText(document.getWordRangeAtPosition(position));
+	
+				// Check if the current line contains a function call
+				const functionCallPattern = /(\w+)\s*\(/;
+				const match = functionCallPattern.exec(line);
+			
+				if (match) {
+					const functionName = match[1];
+	
+					if (functionName !== "factorial"){
+						return null;
+					}
+
+					// Function documentation
+					const documentation = new vscode.MarkdownString('This method takes a list of factors and their levels, and creates a full factorial design by creating each unique combination of the factors. The returned set of combinations is in a random order.');
+
+					// Parameter information
+					const parameters = [
+						new vscode.ParameterInformation('factors', 'The factors object should contain a property for each different factor. Each property-factor should have a value of an array, with each element of the array corresponding to a level of the factor.'),
+						new vscode.ParameterInformation('repetitions', 'The number of times to repeat each unique combination of the factors in the output sample.'),
+						new vscode.ParameterInformation('unpack', 'If true then the output will be an object with a property for each factor in the original factors object. The value of each property-factor will be an array containing the levels of the factor in a random order. The order will be consistent across each property-factor (e.g., the first element of each property-factor will specify one unique combination of the factors). If false, then the return value will be an array of objects where each property-factor contains only a single value.'),
+					];
+
+					// Create the SignatureInformation object
+					const signatureInformation = new vscode.SignatureInformation('factorial(factors: object, repetitions: integer, unpack: boolean)', documentation);
+					signatureInformation.parameters = parameters;
+
+					// Example usage in a SignatureHelp object
+					// TODO: make sure the active signature index tracks the actual signature index
+					const signatureHelp = new vscode.SignatureHelp();
+					signatureHelp.signatures = [signatureInformation];
+					signatureHelp.activeSignature = 0;
+
+					// Return the SignatureHelp object from your provideSignatureHelp function
+					return signatureHelp;
+				}
+			
+				return null;
+			}
+		},
+		'(', ',', ' ' // Trigger characters
+	);
+
+	context.subscriptions.push(signatureHelpProvider);
 }
 
 // This method is called when your extension is deactivated
