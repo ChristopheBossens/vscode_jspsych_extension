@@ -60,6 +60,9 @@
         "body" : [
             "let ${1:trial} = {",
             "\ttype : jsPsychBrowserCheck,",
+            "\tinclusion_function : (data) => {${2}},",
+            "\texclusion_message : (data) => {${3}},",
+            "};\n"
         ],
         "description" : "This plugin measures and records various features of the participant's browser and can end the experiment if defined inclusion criteria are not met."
     },
@@ -220,7 +223,7 @@
             "\ttype : jsPsychHtmlAudioResponse," , 
             "\tstimulus : '${2:stimulus}',", 
             "\trecording_duration : ${3}", 
-            "}\n;"
+            "};\n"
         ],
 		"description" : "This plugin displays HTML content and records audio from the participant via a microphone."
 	},
@@ -232,8 +235,202 @@
             "\ttype : jsPsychHtmlButtonResponse," , 
             "\tstimulus : '${2:stimulus}',", 
             "\tchoices : [${3}]", 
-            "}\n;"
+            "};\n"
         ],
 		"description" : "Display an HTML-formatted stimulus and allow the participant to respond by choosing a button to click. The button can be customized extensively, e.g., using images in place of standard buttons."
 	},
+    "jsPsychHtmlKeyboardResponse" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychHtmlKeyboardResponse"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype     : jsPsychHtmlKeyboardResponse," , 
+            "\tstimulus : '${2:stimulus}',", 
+            "\tchoices  : [${3}],", 
+            "\tprompt   : '${4}'",
+            "};\n"
+        ],
+		"description" : "This plugin displays HTML content and records responses generated with the keyboard.The stimulus can be displayed until a response is given, or for a pre-determined amount of time. The trial can be ended automatically if the participant has failed to respond within a fixed length of time."
+	},
+    "jsPsychHtmlSliderResponse" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychHtmlSliderResponse"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychHtmlSliderResponse," , 
+            "\tstimulus : '${2}',", 
+            "\trequire_movement : ${3:true},", 
+            "\tprompt : '${4}'",
+            "};\n"
+        ],
+		"description" : "This plugin displays HTML content and allows the participant to respond by dragging a slider."
+	},
+    "jsPsychHtmlVideoResponse" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychHtmlVideoResponse"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychHtmlVideoResponse," , 
+            "\tstimulus : '${2}',", 
+            "\trecording_duration : ${3:2000},", 
+            "};\n"
+        ],
+		"description" : "This plugin displays HTML content and records video from the participant via a webcam."
+	},
+    "jsPsychIatHtml" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychIatHtml"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychIatHtml," , 
+            "\tstimulus : '${2}',", 
+            "\tstim_key_association : '${3:left}',",
+            "};\n"
+        ],
+		"description" : "This plugin runs a single trial of the implicit association test (IAT), using HTML content as the stimulus."
+	},
+    "jsPsychIatHtml" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychIatImage"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychIatImage," , 
+            "\tstimulus : '${2}',", 
+            "\tstim_key_association : '${3:left}',",
+            "};\n"
+        ],
+		"description" : "This plugin runs a single trial of the implicit association test (IAT), using an image as the stimulus."
+	},
+    "jsPsychImageButtonResponse" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychImageButtonResponse"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychImageButtonResponse," , 
+            "\tstimulus : '${2}',", 
+            "\tchoices : [${3:'Happy', 'Sad'}],",
+            "\tprompt : '${4:<p>Is this person happy or sad?</p>}',",
+            "};\n"
+        ],
+		"description" : "This plugin displays an image and records responses generated with a button click. The stimulus can be displayed until a response is given, or for a pre-determined amount of time. The trial can be ended automatically if the participant has failed to respond within a fixed length of time. The button itself can be customized using HTML formatting.",
+    },
+    "jsPsychImageKeyboardResponse" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychImageKeyboardResponse"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychImageKeyboardResponse," , 
+            "\tstimulus : '${2}',", 
+            "\tchoices : [${3:'e', 'i'}],",
+            "\tprompt : '${4:<p>Is this person happy or sad?  Press 'e' for happy and 'i' for sad.</p>}',",
+            "};\n"
+        ],
+		"description" : "This plugin displays an image and records responses generated with the keyboard. The stimulus can be displayed until a response is given, or for a pre-determined amount of time. The trial can be ended automatically if the participant has failed to respond within a fixed length of time."
+    },
+    "jsPsychImageSliderResponse" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychImageSliderResponse"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychImageSliderResponse," , 
+            "\tstimulus : '${2}',", 
+            "\tlabels : [${3:'happy', 'sad'}],",
+            "\tprompt : '${4:<p>How happy/sad is this person?</p>}',",
+            "};\n"
+        ],
+		"description" : "This plugin displays and image and allows the participant to respond by dragging a slider."
+    },
+    "jsPsychInitializeCamera" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychInitializeCamera"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychInitializeCamera," ,
+            "};\n"
+        ],
+		"description" : "This plugin asks the participant to grant permission to access a camera. If multiple cameras are connected to the participant's device, then it allows the participant to pick which device to use. Once access is granted for an experiment you do not need to get permission again."
+    },
+    "jsPsychInitializeMicrophone" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychInitializeMicrophone"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychInitializeMicrophone," ,
+            "};\n"
+        ],
+		"description" : "This plugin asks the participant to grant permission to access a microphone. If multiple microphones are connected to the participant's device, then it allows the participant to pick which device to use. Once access is granted for an experiment you do not need to get permission again."
+    },
+    "jsPsychInstructions" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychInstructions"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychInstructions,",
+            "\tpages : [${2}],",
+            "\tshow_clickable_nav : ${3:true}",
+            "};\n"
+        ],
+		"description" : "This plugin is for showing instructions to the participant. It allows participants to navigate through multiple pages of instructions at their own pace, recording how long the participant spends on each page. Navigation can be done using the mouse or keyboard. participants can be allowed to navigate forwards and backwards through pages, if desired."
+    },
+    "jsPsychMaxdiff" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychMaxdiff"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychMaxdiff,",
+            "\talternatives : [${2:'apple', 'orange', 'pear', 'banana'}],",
+            "\tlabels : [${3:'Most Preferred', 'Least Preferred'}],",
+            "\tpreamble: '${4:<p> Please select your <b>most preferred</b> and <b>least preferred</b> fruits. </p>}'",
+            "};\n"
+        ],
+		"description" : "The maxdiff plugin displays a table with rows of alternatives to be selected for two mutually-exclusive categories, typically as 'most' or 'least' on a particular criteria (e.g. importance, preference, similarity). The participant responds by selecting one radio button corresponding to an alternative in both the left and right response columns. The same alternative cannot be endorsed on both the left and right response columns (e.g. 'most' and 'least') simultaneously."
+    },
+    "jsPsychMirrorCamera" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychMirrorCamera"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychMirrorCamera,",
+            "};\n"
+        ],
+		"description" : "This plugin shows a live feed of the participant's camera. It can be useful in experiments that need to record video in order to give the participant a chance to see what is in the view of the camera."
+    },
+    "jsPsychPreload" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychPreload"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychPreload,",
+            "\timages : [${2:'img/sad_face_1.jpg'}],",
+            "\tauto_preload : ${3},",
+            "};\n"
+        ],
+		"description" : "This plugin loads images, audio, and video files. It is used for loading files into the browser's memory before they are needed in the experiment, in order to improve stimulus and response timing, and avoid disruption to the experiment flow."
+    },
+    "jsPsychReconstruction" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychReconstruction"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychReconstruction,",
+            "\tstim_function : ${2:sample_function},",
+            "\tstarting_value : ${3:0.5},",
+            "};\n"
+        ],
+		"description" : "This plugin allows a participant to interact with a stimulus by modifying a parameter of the stimulus and observing the change in the stimulus in real-time."
+    },
+    "jsPsychResize" : {
+		"scope" : "javascript, html",
+		"prefix" : ["jsPsychResize"],
+		"body" : [
+            "let ${1:trial} = {", 
+            "\ttype : jsPsychResize,",
+            "\titem_width : ${2:3 + 3/8},",
+            "\titem_height : ${3:2 + 1/8},",
+            "\tprompt : '${2:<p>Click and drag the lower right corner of the box until the box is the same size as a credit card held up to the screen.</p>}',",
+            "\tpixels_per_unit : ${3:150},",
+            "};\n"
+        ],
+		"description" : "This plugin displays a resizable div container that allows the user to drag until the container is the same size as the item being measured."
+    },
 }
